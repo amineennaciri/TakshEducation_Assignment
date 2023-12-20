@@ -3,12 +3,14 @@ import axios from 'axios';
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 function CreateExam() {
     const [title, setTitle] = useState('');
     const [duration, setDuration] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
     const handleSaveExam = () => {
         const data = {
             title,
@@ -18,11 +20,12 @@ function CreateExam() {
         axios.post('http://localhost:8000/addexam', data)
         .then(()=>{
             setLoading(false);
+            enqueueSnackbar('Exam created successfully', { variant : 'success'})
             navigate('/');
         })
         .catch((error)=>{
             setLoading(false);
-            alert('An error happened. Please check console');
+            enqueueSnackbar('Error', { variant : 'error'})
             console.log(error);
         })
     };

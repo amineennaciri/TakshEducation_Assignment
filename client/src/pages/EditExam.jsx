@@ -4,6 +4,7 @@ import axios from 'axios';
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 function EditExam() {
     const [title, setTitle] = useState('');
@@ -11,7 +12,7 @@ function EditExam() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const {examId} = useParams();
-    console.log(`http://localhost:8000/exams/${examId}`);
+    const { enqueueSnackbar } = useSnackbar();
     useEffect(()=>{
         setLoading(true);
         axios.get(`http://localhost:8000/exams/${examId}`)
@@ -21,7 +22,7 @@ function EditExam() {
             setLoading(false);
         }).catch((error)=>{
             setLoading(false);
-            alert('An error happened. Please check console');
+            enqueueSnackbar('Error', { variant : 'error'})
             console.log(error);
         })
     },[])
@@ -34,11 +35,12 @@ function EditExam() {
         axios.put(`http://localhost:8000/exams/${examId}`, data)
         .then(()=>{
             setLoading(false);
+            enqueueSnackbar('Exam edited successfully', { variant : 'success'})
             navigate('/');
         })
         .catch((error)=>{
             setLoading(false);
-            alert('An error happened. Please check console');
+            enqueueSnackbar('Error', { variant : 'error'})
             console.log(error);
         })
     };
