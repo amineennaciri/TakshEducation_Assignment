@@ -15,7 +15,6 @@ module.exports = {
                     message: "Send all required fields: title, duration"
                 })
             }
-            /* console.log(req.user._id); */
             const exam = new Exam({
                 title: req.body.title,
                 duration: req.body.duration,
@@ -41,7 +40,7 @@ module.exports = {
     },
     getOneExam: async (req, res)=>{
         try {
-            const exam = await Exam.findOne(new ObjectId(req.params.id));
+            const exam = await Exam.findOne(new ObjectId(req.params.examId));
             if(!exam){
                 return res.status(404).json({
                     message: 'Exam not found'
@@ -63,8 +62,8 @@ module.exports = {
                     message: "Send all required fields: title, duration"
                 })
             }
-            const { id } = req.params;
-            const result = await Exam.findByIdAndUpdate(id, req.body);
+            const { examId } = req.params;
+            const result = await Exam.findByIdAndUpdate(examId, req.body);
             if (!result){
                 return res.status(404).json({
                     message: 'Exam not found'
@@ -78,8 +77,8 @@ module.exports = {
     },
     deleteExam: async (req, res)=>{
         try {
-            const { id } = req.params;
-            const result = await Exam.findByIdAndDelete(id, req.body);
+            const { examId } = req.params;
+            const result = await Exam.findByIdAndDelete(examId, req.body);
             if (!result){
                 return res.status(404).json({
                     message: 'Exam not found'
