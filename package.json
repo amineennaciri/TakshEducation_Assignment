@@ -1,0 +1,17 @@
+{
+  "name": "taksheducation_assignment",
+  "version": "1.0.0",
+  "description": "Design and implement a set of CRUD APIs to facilitate the management of exams and associated multiple-choice questions (MCQs). Your task involves using the MERN stack (MongoDB, Express.js, React.js, Node.js). Additionally, we'd like you to deploy the application on an AWS environment.",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:client": "cd savasana-api && npm run dev",
+    "start:server": "cd server && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
