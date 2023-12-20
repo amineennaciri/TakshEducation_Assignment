@@ -1,4 +1,25 @@
 # TakshEducation_Assignment
+
+# INSTRUCTIONS ON HOW TO RUN THE APP
+Please Follow the instructions below:
+
+
+npm install
+
+
+cd server/
+
+
+npm install
+
+
+cd ../client/
+
+
+npm install
+
+
+cd ../ && npm start
 # Task Details: CRUD API for Exam Management
 
 # Objective:
