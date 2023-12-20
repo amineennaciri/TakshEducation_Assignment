@@ -8,7 +8,7 @@ import { useSnackbar } from 'notistack';
 
 function EditExam() {
     const [title, setTitle] = useState('');
-    const [duration, setDuration] = useState(null);
+    const [duration, setDuration] = useState(undefined);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const {examId} = useParams();
