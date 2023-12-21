@@ -1,7 +1,14 @@
 # TakshEducation_Assignment
 
 # INSTRUCTIONS ON HOW TO RUN THE APP
-Please Follow the instructions below:
+Notice: run the back end server on port 8000
+cd server/config
+touch .env
+create the following variables:
+PORT = 8000
+DB_STRING = (insert here your mongodb database link)
+
+Now in order to run the app, go back to the root of the project and Follow the instructions below:
 
 
 npm install

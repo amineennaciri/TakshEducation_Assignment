@@ -4,6 +4,7 @@ import { BiUserCircle } from 'react-icons/bi';
 import {AiOutlineEdit} from 'react-icons/ai';
 import {BsInfoCircle} from 'react-icons/bs';
 import { MdOutlineDelete} from 'react-icons/md';
+import {BiShow} from 'react-icons/bi';
 
 function ExamSingleCard({exam}) {
   return (
@@ -23,6 +24,9 @@ function ExamSingleCard({exam}) {
                         <h2 className='my-1'>{exam.duration}</h2>
                     </div>
                     <div className='flex justify-start items-center gap-x-2 mt-4 p-4'>
+                        <Link to={`/exams/${exam._id}/mcqs`}>
+                            <BiShow className='text-2xl text-blue-800 hover:text-black' />
+                        </Link>
                         <Link to={`/exams/details/${exam._id}`}>
                             <BsInfoCircle className='text-2xl text-green-800 hover:text-black'/>
                         </Link>

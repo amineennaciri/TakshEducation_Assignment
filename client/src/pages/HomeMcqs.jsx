@@ -4,6 +4,8 @@ import {useParams} from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import DisplayMcqs from '../homeMcqs/DisplayMcqs';
+import { MdOutlineAddBox } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 function HomeMcqs() {
     const [mcqsData, setMcqsData] = useState({});
@@ -27,11 +29,19 @@ function HomeMcqs() {
     <div className='p-4'>
           <BackButton />
           <h1 className='text-3xl my-4'>Show All MCQs</h1>
+          <div className='flex justify-between items-center'>
+                <h1 className='text-3xl my-8'>
+                    MCQs List
+                </h1>
+                <Link to={`/exams/${examId}/addmcq`}>
+                    <MdOutlineAddBox className='text-sky-800 text-4xl'/>
+                </Link>
+            </div>
           {
               loading ? (
                   <Spinner/>
               ) : 
-              mcqsData.map((el)=>(
+              Array.isArray(mcqsData) && mcqsData.map((el)=>(
                     <DisplayMcqs key={el._id} mcq={el}/>
                 ))
           }

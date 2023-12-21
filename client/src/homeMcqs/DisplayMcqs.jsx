@@ -21,12 +21,12 @@ function DisplayMcqs({mcq}) {
                           <span className='text-xl mr-4 text-gray-500'>
                               Options
                           </span>
-                          {mcq.options}
-                          {/*<ol className="list-decimal">
-                             {mcqs.options.map((el,index)=>(
+                          {/* {mcq.options} */}
+                          <ol className="list-decimal">
+                             {Array.isArray(mcq.options) && mcq.options.map((el,index)=>(
                                 <li key={index}>{el}</li>
                               ))}
-                            </ol> */}
+                            </ol>
                       </div>
                       <div className='my-4'>
                           <span className='text-xl mr-4 text-gray-500'>
