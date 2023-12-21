@@ -1,12 +1,11 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import {useParams} from 'react-router-dom';
 import axios from 'axios';
 import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { useParams } from 'react-router-dom';
-
-function CreateMcqs() {
+function EditMcqs() {
     const [question, setQuestion] = useState('');
     const [option0, setOption0] = useState('');
     const [option1, setOption1] = useState('');
@@ -15,20 +14,37 @@ function CreateMcqs() {
     const [correctOptionIndex, setCorrectOptionIndex] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const {examId, mcqId} = useParams();
     const { enqueueSnackbar } = useSnackbar();
-    const { examId } = useParams();
-    const handleSaveMCQs= () => {
-        const optionsArray = [option0,option1,option2,option3];
-        const data = {
-            question,
-            options: optionsArray,
-            correctOptionIndex,
-        };
+    useEffect(()=>{
         setLoading(true);
-        axios.post(`http://localhost:8000/exams/${examId}/addmcq`, data)
+        axios.get(`http://localhost:8000/exams/${examId}/mcqs/${mcqId}`)
+        .then((response)=>{
+          setQuestion(response.data.question);
+          setOption0(response.data.options[0]);
+          setOption1(response.data.options[1]);
+          setOption2(response.data.options[2]);
+          setOption3(response.data.options[3]);
+          setCorrectOptionIndex(response.data.correctOptionIndex);
+            setLoading(false);
+        }).catch((error)=>{
+            setLoading(false);
+            enqueueSnackbar('Error', { variant : 'error'})
+            console.log(error);
+        })
+    },[])
+    const handleEditMCQs = () => {
+      const optionsArray = [option0,option1,option2,option3];
+      const data = {
+          question,
+          options: optionsArray,
+          correctOptionIndex,
+      };
+        setLoading(true);
+        axios.put(`http://localhost:8000/exams/${examId}/mcqs/${mcqId}`, data)
         .then(()=>{
             setLoading(false);
-            enqueueSnackbar('MCQs created successfully', { variant : 'success'})
+            enqueueSnackbar('MCQ edited successfully', { variant : 'success'})
             navigate(`/exams/${examId}/mcqs`);
         })
         .catch((error)=>{
@@ -40,7 +56,7 @@ function CreateMcqs() {
   return (
     <div className='p-4'>
     <BackButton />
-    <h1 className='text-3xl my-4'>Create MCQs</h1>
+    <h1 className='text-3xl my-4'>Edit MCQs</h1>
     {loading ? <Spinner/> 
     : ''}
     <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
@@ -69,7 +85,7 @@ function CreateMcqs() {
             <label className="text-xl mr-4 text-gray-500">Correct option index (choose a value between 0 and 3)</label>
             <input type="number" min="0" max="3" step="1" value={correctOptionIndex} onChange={(e)=>setCorrectOptionIndex(e.target.value)} className='border-2 border-gray-500 px-4 py-2 w-full' />
         </div>
-        <button className='p-2 bg-sky-300 m-8' onClick={handleSaveMCQs}>
+        <button className='p-2 bg-sky-300 m-8' onClick={handleEditMCQs}>
             Save
         </button>
     </div>
@@ -77,4 +93,4 @@ function CreateMcqs() {
   )
 }
 
-export default CreateMcqs
+export default EditMcqs

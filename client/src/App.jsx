@@ -6,6 +6,9 @@ import DeleteExam from './pages/DeleteExam.jsx';
 import ShowExam from './pages/ShowExam.jsx';
 import HomeMcqs from './pages/HomeMcqs.jsx';
 import CreateMcqs from './pages/CreateMcqs.jsx';
+import ShowMcqs from './pages/ShowMcqs.jsx';
+import DeleteMcqs from './pages/DeleteMcqs.jsx';
+import EditMcqs from './pages/EditMcqs.jsx';
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
       
       <Route path='/exams/:examId/mcqs' element={<HomeMcqs />}/>
       <Route path='/exams/:examId/addmcq' element={<CreateMcqs />}/>
+      <Route path='/exams/:examId/mcqs/:mcqId' element={<ShowMcqs />}/>
+      <Route path='/exams/:examId/mcqs/delete/:mcqId' element={<DeleteMcqs />}/>
+      <Route path='/exams/:examId/mcqs/edit/:mcqId' element={<EditMcqs />}/>
 
 
     </Routes>

@@ -42,7 +42,7 @@ function HomeMcqs() {
                   <Spinner/>
               ) : 
               Array.isArray(mcqsData) && mcqsData.map((el)=>(
-                    <DisplayMcqs key={el._id} mcq={el}/>
+                    <DisplayMcqs key={el._id} mcq={el} examId={examId}/>
                 ))
           }
       </div>

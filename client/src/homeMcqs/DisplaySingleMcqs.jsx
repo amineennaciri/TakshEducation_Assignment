@@ -1,10 +1,4 @@
-import {AiOutlineEdit} from 'react-icons/ai';
-import {BsInfoCircle} from 'react-icons/bs';
-import {MdOutlineDelete} from 'react-icons/md';
-import { Link } from 'react-router-dom';
-
-function DisplayMcqs({mcq, examId}) {
-    const mcqId = mcq._id;
+function DisplaySingleMcqs({mcq}) {
   return (
     <div className = 'flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
                       <div className='my-4'>
@@ -58,19 +52,8 @@ function DisplayMcqs({mcq, examId}) {
                               {new Date(mcq.timestamp).toString()}
                           </span>
                       </div>
-                      <div className='my-4 flex justify-between items-center'>
-                        <Link to={`/exams/${examId}/mcqs/${mcqId}`}>
-                            <BsInfoCircle className='text-2xl text-green-800'/>
-                        </Link>
-                        <Link to={`/exams/${examId}/mcqs/edit/${mcqId}`}>
-                            <AiOutlineEdit className='text-2xl text-yellow-600'/>
-                        </Link>
-                        <Link to={`/exams/${examId}/mcqs/delete/${mcqId}`}>
-                            <MdOutlineDelete className='text-2xl text-red-600'/>
-                        </Link>
-                      </div>
                   </div>
   )
 }
 
-export default DisplayMcqs
+export default DisplaySingleMcqs
